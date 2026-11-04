@@ -23,10 +23,8 @@ h1 span{color:var(--red)}.lead{color:#c1c1cb;font-size:17px;line-height:1.7;max-
 .secondary{border:1px solid #454550;color:#fff}
 .note{font-size:12px;color:#92929e}
 .art{min-height:350px;border-radius:22px;padding:24px;background:radial-gradient(circle at 50% 20%,#5b1017 0,#211016 38%,#111118 75%);border:1px solid #3a2028;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
-.art:before,.art:after{content:"";position:absolute;width:210px;height:300px;border:1px solid #ffffff18;border-radius:16px;transform:rotate(-15deg)}
-.art:after{transform:rotate(15deg);width:180px}
-.app-icon{z-index:1;width:170px;height:170px;border-radius:34px;background:linear-gradient(145deg,#ff343b,#a9000b);display:flex;align-items:center;justify-content:center;box-shadow:0 20px 65px #0009;border:1px solid #ffffff40;font-size:52px;font-weight:1000;letter-spacing:-5px}
-.app-icon small{font-size:14px;letter-spacing:3px;display:block;text-align:center}
+.art:before,.art:after{display:none}
+.brand-art{position:relative;z-index:1;display:block;width:min(100%,320px);height:auto;aspect-ratio:1;object-fit:contain;border-radius:16px;box-shadow:0 20px 65px #0009}
 .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:10px 0 58px}
 .stat{background:var(--panel);border:1px solid #292933;border-radius:13px;padding:20px;text-align:center}.stat b{font-size:20px;display:block}.stat span{font-size:12px;color:var(--muted);margin-top:6px;display:block}
 .section-title{text-align:center;font-size:30px;margin:0 0 25px}
@@ -50,7 +48,7 @@ footer{text-align:center;color:#777783;font-size:12px;padding:25px;border-top:1p
     <div class="actions"><a class="btn primary" href="CINE-TV.apk" download>↓ &nbsp; BAIXAR APK</a><a class="btn secondary" href="#instalacao">Como instalar</a></div>
     <div class="note">Arquivo APK direto • 8,4 MB • Android</div>
   </div>
-  <div class="art"><div class="app-icon"><div>CT<small>FLIX</small></div></div></div>
+  <div class="art"><img class="brand-art" src="logo-cine-tv-flix.jpeg" alt="Logo Cine TV Flix"></div>
 </section>
 <section class="stats">
   <div class="stat"><b>8,4 MB</b><span>Tamanho do arquivo</span></div>
