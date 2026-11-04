@@ -11,7 +11,7 @@
 <link rel="preload" as="image" href="posters/poster-sopranos.jpg">
 <link rel="preload" as="image" href="posters/poster-dark-city.jpg">
 <style>
-:root{--red:#ed1c24;--bg:#09090d;--panel:#15151d;--muted:#aaaab6;--white:#fff}
+:root{--red:#ed1c24;--bg:#09090d;--panel:#15151d;--muted:#aaaab6;--white:#fff;--gold:#ffbc00}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--white);font-family:Arial,Helvetica,sans-serif}
 header{height:74px;display:flex;align-items:center;justify-content:space-between;padding:0 max(6%,calc((100% - 1120px)/2));border-bottom:1px solid #25252d;background:#0b0b10}
 .logo{font-size:25px;font-weight:900;letter-spacing:-1px}.logo span{color:var(--red)}
@@ -68,9 +68,50 @@ h1 span{color:var(--red)}.lead{color:#c1c1cb;font-size:17px;line-height:1.7;max-
 
 .install{margin-top:55px;padding:38px 24px;text-align:center;background:linear-gradient(135deg,#271015,#151018 70%);border:1px solid #51222a;border-radius:18px}
 .install h2{font-size:30px;margin:0 0 12px}.install p{color:#c4c4ce;line-height:1.6}
+
+/* === COMMENTS SECTION === */
+.comments-section{margin-top:65px}
+.comments-header{text-align:center;margin-bottom:34px}
+.rating-badge{display:inline-flex;align-items:center;gap:10px;background:#15151e;border:1px solid #2e2e3a;padding:8px 18px;border-radius:30px;margin-top:10px}
+.rating-badge .stars{color:var(--gold);font-size:16px;letter-spacing:2px}
+.rating-badge .rating-text{font-size:13px;color:#d5d5df}
+.rating-badge strong{color:#fff}
+
+.comments-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.comment-card{background:var(--panel);border:1px solid #272733;border-radius:14px;padding:22px;display:flex;flex-direction:column;justify-content:space-between;transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease}
+.comment-card:hover{transform:translateY(-4px);border-color:#3e3e4f;box-shadow:0 12px 30px rgba(0,0,0,.4)}
+
+.comment-user{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.user-avatar{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:15px;color:#fff;flex-shrink:0}
+.avatar-1{background:linear-gradient(135deg,#ff416c,#ff4b2b)}
+.avatar-2{background:linear-gradient(135deg,#8a2387,#e94057)}
+.avatar-3{background:linear-gradient(135deg,#11998e,#38ef7d)}
+.avatar-4{background:linear-gradient(135deg,#4776e6,#8e54e9)}
+.avatar-5{background:linear-gradient(135deg,#f7971e,#ffd200);color:#222}
+.avatar-6{background:linear-gradient(135deg,#00b09b,#96c93d)}
+
+.user-meta{display:flex;flex-direction:column;gap:2px}
+.user-name{font-size:15px;font-weight:700;display:flex;align-items:center;gap:6px}
+.verified{color:#38ef7d;font-size:13px;title:"Usuário Verificado"}
+.user-location{font-size:12px;color:var(--muted)}
+
+.comment-stars{color:var(--gold);font-size:14px;letter-spacing:2px;margin-bottom:10px}
+.comment-text{color:#d2d2dd;font-size:14px;line-height:1.6;margin:0 0 16px;flex-grow:1}
+.comment-text strong{color:#fff;font-weight:600}
+
+.comment-footer{display:flex;align-items:center;justify-content:space-between;font-size:11px;color:#7e7e8c;border-top:1px solid #202029;padding-top:12px}
+.comment-helpful{display:inline-flex;align-items:center;gap:4px;cursor:pointer;transition:color .2s}
+.comment-helpful:hover{color:#fff}
+
+.suggestion-box{margin-top:28px;background:linear-gradient(135deg,#16131c,#14141e);border:1px dashed #3f3546;border-radius:14px;padding:20px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:8px}
+.suggestion-box h4{margin:0;font-size:16px;color:#fff;display:flex;align-items:center;gap:8px}
+.suggestion-box p{margin:0;font-size:13px;color:var(--muted);max-width:540px}
+
 footer{text-align:center;color:#777783;font-size:12px;padding:25px;border-top:1px solid #25252d}
 
+@media(max-width:960px){.comments-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:760px){header{padding:0 20px}.hero{grid-template-columns:1fr;padding-top:20px}.art{min-height:260px;grid-row:1}.features{grid-template-columns:1fr 1fr}.posters-grid{grid-template-columns:repeat(3,1fr);gap:12px}}
+@media(max-width:560px){.comments-grid{grid-template-columns:1fr}}
 @media(max-width:460px){.features{grid-template-columns:1fr}.tag{font-size:10px}.btn{width:100%}.hero{gap:24px}.posters-grid{grid-template-columns:repeat(2,1fr);gap:10px}}
 </style>
 </head>
@@ -131,6 +172,140 @@ footer{text-align:center;color:#777783;font-size:12px;padding:25px;border-top:1p
   <a class="btn primary" href="CINE-TV.apk" download>⬇ &nbsp; INSTALAR AGORA</a>
   <p class="note">Dica: permita a instalação somente se você confia na origem do arquivo.</p>
 </section>
+
+<!-- COMMENTS & REVIEWS SECTION -->
+<section class="comments-section" id="avaliacoes">
+  <div class="comments-header">
+    <span class="eyebrow">Comunidade Cine TV Flix</span>
+    <h2 class="section-title">O que estão dizendo sobre o app 💬</h2>
+    <div class="rating-badge">
+      <span class="stars">★★★★★</span>
+      <span class="rating-text"><strong>4.9 de 5.0</strong> • Baseado em 1.482 avaliações</span>
+    </div>
+  </div>
+
+  <div class="comments-grid">
+    <!-- Comment 1 -->
+    <article class="comment-card">
+      <div>
+        <div class="comment-user">
+          <div class="user-avatar avatar-1">LR</div>
+          <div class="user-meta">
+            <span class="user-name">Lucas Ribeiro <span class="verified" title="Usuário verificado">✔</span></span>
+            <span class="user-location">Belo Horizonte, MG</span>
+          </div>
+        </div>
+        <div class="comment-stars">★★★★★</div>
+        <p class="comment-text">Mano do céu, cancelei dois streamings depois que instalei esse app. Os canais de esportes rodam liso sem travar nem em dia de clássico! Só queria pedir pra equipe se conseguem colocar a série <strong>Yellowstone</strong> completa dublada. De resto, nota 10!</p>
+      </div>
+      <div class="comment-footer">
+        <span>Há 2 horas</span>
+        <span class="comment-helpful">👍 Útil (23)</span>
+      </div>
+    </article>
+
+    <!-- Comment 2 -->
+    <article class="comment-card">
+      <div>
+        <div class="comment-user">
+          <div class="user-avatar avatar-2">CF</div>
+          <div class="user-meta">
+            <span class="user-name">Camila Fontes <span class="verified" title="Usuário verificado">✔</span></span>
+            <span class="user-location">Campinas, SP</span>
+          </div>
+        </div>
+        <div class="comment-stars">★★★★★</div>
+        <p class="comment-text">Sensacional! A qualidade de imagem é surreal e o melhor de tudo: sem anúncios invasivos a cada 5 minutos. Minha mãe amou os canais 24h. Equipe, por favor adicionem o dorama <strong>Pousando no Amor</strong>, estamos maratonando aqui em casa! 🙌</p>
+      </div>
+      <div class="comment-footer">
+        <span>Há 5 horas</span>
+        <span class="comment-helpful">👍 Útil (18)</span>
+      </div>
+    </article>
+
+    <!-- Comment 3 -->
+    <article class="comment-card">
+      <div>
+        <div class="comment-user">
+          <div class="user-avatar avatar-3">RS</div>
+          <div class="user-meta">
+            <span class="user-name">Rodrigo Silveira <span class="verified" title="Usuário verificado">✔</span></span>
+            <span class="user-location">Curitiba, PR</span>
+          </div>
+        </div>
+        <div class="comment-stars">★★★★★</div>
+        <p class="comment-text">Simplesmente o melhor player que já testei no celular e na TV Box. Abre rápido, navegação limpa e não consome quase nada de bateria. Parabéns pela agilidade nas atualizações semanais, continuem assim!</p>
+      </div>
+      <div class="comment-footer">
+        <span>Ontem</span>
+        <span class="comment-helpful">👍 Útil (31)</span>
+      </div>
+    </article>
+
+    <!-- Comment 4 -->
+    <article class="comment-card">
+      <div>
+        <div class="comment-user">
+          <div class="user-avatar avatar-4">JM</div>
+          <div class="user-meta">
+            <span class="user-name">Juliana Mendes <span class="verified" title="Usuário verificado">✔</span></span>
+            <span class="user-location">Salvador, BA</span>
+          </div>
+        </div>
+        <div class="comment-stars">★★★★★</div>
+        <p class="comment-text">App leve demais, baixei rapidinho no 4G e já tava assistindo <strong>The Sopranos</strong> na mesma hora. Se puderem colocar a trilogia clássica de <strong>O Poderoso Chefão</strong> remasterizada em 4K eu agradeço muito! Já recomendei no grupo da família.</p>
+      </div>
+      <div class="comment-footer">
+        <span>Há 1 dia</span>
+        <span class="comment-helpful">👍 Útil (15)</span>
+      </div>
+    </article>
+
+    <!-- Comment 5 -->
+    <article class="comment-card">
+      <div>
+        <div class="comment-user">
+          <div class="user-avatar avatar-5">MN</div>
+          <div class="user-meta">
+            <span class="user-name">Marcelo Nogueira <span class="verified" title="Usuário verificado">✔</span></span>
+            <span class="user-location">Fortaleza, CE</span>
+          </div>
+        </div>
+        <div class="comment-stars">★★★★★</div>
+        <p class="comment-text">Muito bom mesmo, canais 24 horas perfeitos e filmes que acabaram de sair do cinema com áudio e vídeo de primeira. Podem adicionar o anime <strong>Attack on Titan</strong> com as últimas partes dubladas? Valeu demais!</p>
+      </div>
+      <div class="comment-footer">
+        <span>Há 2 dias</span>
+        <span class="comment-helpful">👍 Útil (27)</span>
+      </div>
+    </article>
+
+    <!-- Comment 6 -->
+    <article class="comment-card">
+      <div>
+        <div class="comment-user">
+          <div class="user-avatar avatar-6">FA</div>
+          <div class="user-meta">
+            <span class="user-name">Fernanda Alencar <span class="verified" title="Usuário verificado">✔</span></span>
+            <span class="user-location">Porto Alegre, RS</span>
+          </div>
+        </div>
+        <div class="comment-stars">★★★★★</div>
+        <p class="comment-text">Fiquei chocada quando vi que tem até cinema clássico e cult (vi que tem Bergman)! Se conseguirem adicionar a filmografia do <strong>Tarkovsky</strong> e do <strong>Hitchcock</strong> vocês ganham o troféu de melhor catálogo do Brasil! 👏</p>
+      </div>
+      <div class="comment-footer">
+        <span>Há 3 dias</span>
+        <span class="comment-helpful">👍 Útil (42)</span>
+      </div>
+    </article>
+  </div>
+
+  <div class="suggestion-box">
+    <h4>💡 Quer recomendar um filme, série ou canal?</h4>
+    <p>Nossa equipe adiciona novos títulos toda semana. Após instalar o app, basta acessar o menu de pedidos e enviar o nome do que você quer assistir!</p>
+  </div>
+</section>
+
 </main>
 <footer>© Cine TV Flix • Página de download do aplicativo</footer>
 
