@@ -6,6 +6,10 @@
 <meta name="theme-color" content="#0b0b0f">
 <meta name="description" content="Baixe o aplicativo Cine TV Flix para Android.">
 <title>Cine TV Flix - Baixe o aplicativo</title>
+<!-- Preload poster images for faster rendering -->
+<link rel="preload" as="image" href="posters/poster-esportes.jpg">
+<link rel="preload" as="image" href="posters/poster-sopranos.jpg">
+<link rel="preload" as="image" href="posters/poster-dark-city.jpg">
 <style>
 :root{--red:#ed1c24;--bg:#09090d;--panel:#15151d;--muted:#aaaab6;--white:#fff}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--white);font-family:Arial,Helvetica,sans-serif}
@@ -35,11 +39,11 @@ h1 span{color:var(--red)}.lead{color:#c1c1cb;font-size:17px;line-height:1.7;max-
 .posters-title .emoji{display:inline-block;animation:bounce 2s ease-in-out infinite}
 @keyframes bounce{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(-8px) scale(1.15)}}
 
-.posters-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;perspective:1000px}
-.poster-card{position:relative;border-radius:14px;overflow:hidden;aspect-ratio:2/3;cursor:pointer;transform-style:preserve-3d;transition:transform .45s cubic-bezier(.25,.46,.45,.94),box-shadow .45s ease}
-.poster-card img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s cubic-bezier(.25,.46,.45,.94),filter .4s ease}
+.posters-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;perspective:1200px}
+.poster-card{position:relative;border-radius:14px;overflow:hidden;aspect-ratio:2/3;cursor:pointer;transform-style:preserve-3d;will-change:transform;transition:transform .45s cubic-bezier(.25,.46,.45,.94),box-shadow .45s ease}
+.poster-card img{width:100%;height:100%;object-fit:cover;display:block;will-change:transform;transition:transform .5s cubic-bezier(.25,.46,.45,.94),filter .4s ease}
 .poster-card::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.7) 100%);opacity:0;transition:opacity .4s ease;pointer-events:none}
-.poster-card:hover{transform:translateY(-10px) scale(1.04);box-shadow:0 25px 50px rgba(237,28,36,.25),0 10px 20px rgba(0,0,0,.5)}
+.poster-card:hover{transform:translateY(-10px) scale(1.03);box-shadow:0 25px 50px rgba(237,28,36,.25),0 10px 20px rgba(0,0,0,.5)}
 .poster-card:hover img{transform:scale(1.08);filter:brightness(1.1) saturate(1.2)}
 .poster-card:hover::after{opacity:1}
 
@@ -47,25 +51,27 @@ h1 span{color:var(--red)}.lead{color:#c1c1cb;font-size:17px;line-height:1.7;max-
 .poster-card::before{content:'';position:absolute;inset:-2px;border-radius:16px;background:linear-gradient(135deg,var(--red),#ff6b6b,var(--red));z-index:-1;opacity:0;transition:opacity .4s ease;filter:blur(4px)}
 .poster-card:hover::before{opacity:1}
 
-/* Staggered fade-in animation on scroll */
-.poster-card{opacity:0;transform:translateY(40px);animation:fadeSlideUp .7s ease forwards}
-.poster-card:nth-child(1){animation-delay:.1s}
-.poster-card:nth-child(2){animation-delay:.2s}
-.poster-card:nth-child(3){animation-delay:.3s}
-.poster-card:nth-child(4){animation-delay:.4s}
-.poster-card:nth-child(5){animation-delay:.5s}
-@keyframes fadeSlideUp{to{opacity:1;transform:translateY(0)}}
+/* Staggered reveal animation */
+.poster-card{opacity:0;transform:translateY(40px) scale(.95)}
+.poster-card.visible{animation:fadeSlideUp .7s ease forwards}
+.poster-card:nth-child(1).visible{animation-delay:.05s}
+.poster-card:nth-child(2).visible{animation-delay:.12s}
+.poster-card:nth-child(3).visible{animation-delay:.19s}
+.poster-card:nth-child(4).visible{animation-delay:.26s}
+.poster-card:nth-child(5).visible{animation-delay:.33s}
+.poster-card:nth-child(6).visible{animation-delay:.40s}
+@keyframes fadeSlideUp{to{opacity:1;transform:translateY(0) scale(1)}}
 
-/* Shimmer loading effect */
-.poster-card .shimmer{position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.06),transparent);animation:shimmer 2.5s infinite;pointer-events:none}
+/* Subtle shimmer */
+.poster-card .shimmer{position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.06),transparent);animation:shimmer 3s infinite;pointer-events:none}
 @keyframes shimmer{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
 
 .install{margin-top:55px;padding:38px 24px;text-align:center;background:linear-gradient(135deg,#271015,#151018 70%);border:1px solid #51222a;border-radius:18px}
 .install h2{font-size:30px;margin:0 0 12px}.install p{color:#c4c4ce;line-height:1.6}
 footer{text-align:center;color:#777783;font-size:12px;padding:25px;border-top:1px solid #25252d}
 
-@media(max-width:760px){header{padding:0 20px}.hero{grid-template-columns:1fr;padding-top:20px}.art{min-height:260px;grid-row:1}.features{grid-template-columns:1fr 1fr}.posters-grid{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:460px){.features{grid-template-columns:1fr}.tag{font-size:10px}.btn{width:100%}.hero{gap:24px}.posters-grid{grid-template-columns:repeat(2,1fr);gap:10px}.posters-grid .poster-card:last-child{grid-column:1/-1;max-width:60%;margin:0 auto}}
+@media(max-width:760px){header{padding:0 20px}.hero{grid-template-columns:1fr;padding-top:20px}.art{min-height:260px;grid-row:1}.features{grid-template-columns:1fr 1fr}.posters-grid{grid-template-columns:repeat(3,1fr);gap:12px}}
+@media(max-width:460px){.features{grid-template-columns:1fr}.tag{font-size:10px}.btn{width:100%}.hero{gap:24px}.posters-grid{grid-template-columns:repeat(2,1fr);gap:10px}}
 </style>
 </head>
 <body>
@@ -79,7 +85,7 @@ footer{text-align:center;color:#777783;font-size:12px;padding:25px;border-top:1p
     <div class="actions"><a class="btn primary" href="CINE-TV.apk" download>⬇ &nbsp; BAIXAR APK</a><a class="btn secondary" href="#instalacao">Como instalar</a></div>
     <div class="note">Arquivo APK direto • 8,4 MB • Android</div>
   </div>
-  <div class="art"><img class="brand-art" src="logo-cine-tv-flix.jpeg" alt="Logo Cine TV Flix"></div>
+  <div class="art"><img class="brand-art" src="logo-cine-tv-flix.jpeg" alt="Logo Cine TV Flix" width="320" height="320"></div>
 </section>
 <h2 class="section-title">Por que baixar o Cine TV Flix?</h2>
 <section class="features">
@@ -91,25 +97,29 @@ footer{text-align:center;color:#777783;font-size:12px;padding:25px;border-top:1p
 <!-- POSTERS SECTION -->
 <section class="posters-section">
   <h2 class="posters-title">Para todos os gostos!! <span class="emoji">🤩</span></h2>
-  <div class="posters-grid">
+  <div class="posters-grid" id="postersGrid">
     <div class="poster-card">
-      <img src="posters/poster-esportes.jpg" alt="Esportes ao vivo" loading="lazy">
+      <img src="posters/poster-esportes.jpg" alt="Esportes ao vivo" width="400" height="601" loading="lazy" decoding="async">
       <div class="shimmer"></div>
     </div>
     <div class="poster-card">
-      <img src="posters/poster-sopranos.jpg" alt="The Sopranos" loading="lazy">
+      <img src="posters/poster-sopranos.jpg" alt="The Sopranos" width="400" height="601" loading="lazy" decoding="async">
       <div class="shimmer"></div>
     </div>
     <div class="poster-card">
-      <img src="posters/poster-dark-city.jpg" alt="Dark City" loading="lazy">
+      <img src="posters/poster-dark-city.jpg" alt="Dark City" width="400" height="533" loading="lazy" decoding="async">
       <div class="shimmer"></div>
     </div>
     <div class="poster-card">
-      <img src="posters/poster-mentalista.jpg" alt="O Mentalista" loading="lazy">
+      <img src="posters/poster-mentalista.jpg" alt="O Mentalista" width="387" height="516" loading="lazy" decoding="async">
       <div class="shimmer"></div>
     </div>
     <div class="poster-card">
-      <img src="posters/poster-breaking-bad.jpg" alt="Breaking Bad" loading="lazy">
+      <img src="posters/poster-breaking-bad.jpg" alt="Breaking Bad" width="190" height="281" loading="lazy" decoding="async">
+      <div class="shimmer"></div>
+    </div>
+    <div class="poster-card">
+      <img src="posters/poster-setimo-selo.jpg" alt="O Sétimo Selo" width="310" height="420" loading="lazy" decoding="async">
       <div class="shimmer"></div>
     </div>
   </div>
@@ -123,5 +133,22 @@ footer{text-align:center;color:#777783;font-size:12px;padding:25px;border-top:1p
 </section>
 </main>
 <footer>© Cine TV Flix • Página de download do aplicativo</footer>
+
+<!-- Intersection Observer: animate posters only when visible -->
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+  var cards=document.querySelectorAll('.poster-card');
+  if('IntersectionObserver' in window){
+    var obs=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}
+      })
+    },{threshold:0.15});
+    cards.forEach(function(c){obs.observe(c)})
+  } else {
+    cards.forEach(function(c){c.classList.add('visible')})
+  }
+})
+</script>
 </body>
 </html>
